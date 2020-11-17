@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        let paddingLeft = 0;
+        function moveRight() {
+            paddingLeft += 20;
+            document.getElementById("me").style.paddingLeft = `${paddingLeft}px`;
+        }
+    </script>
+</head>
+<body>
+<img id="me" src="https://pngimg.com/uploads/square/square_PNG24.png" width="100" height="100" />
+<p>Click button below to move the image to right by 20px</p>
+<button onclick="moveRight()">Move the image right</button>
+</body>
+</html>

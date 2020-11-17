@@ -1,0 +1,29 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id='app'>
+    <myform :prop="url"> Remember meee </myform>
+</div>
+<script>
+    Vue.component('myform', {
+        props: ['prop'],
+        template: `
+          <form v-bind:action="prop">
+          <input type="text" placeholder="Username" name="user">
+          <input type="text" placeholder="Password" name="pass">
+          <input type="checkbox" name="remember">
+          <slot></slot>
+          <input type="submit">
+          </form>`
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            url: 'login.php'
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
+    <script src="debug.js"></script>
+    <style>
+        .select {
+            width: 50%;
+            height: auto;
+        }
+    </style>
+</head>
+<body onload="generateOptions()">
+<div id="jumbotron">
+    <h2>View Faculty Profile</h2>
+</div>
+<div class="m-4 select">
+    Select Faculty:
+    <select id="faculty"></select>
+    <button class="btn btn-dark" onclick="show()" type="button">
+        View Profile
+    </button>
+</div>
+<div id="profile"></div>
+<script>
+    function generateOptions() {
+        var output = "";
+        // output += "<option value='5'>GG</option>";
+        for (var faculty of facultyList) {
+            // console.log(faculty);
+            // output += "<option value='" + faculty + "' >" + faculty + "</option>";
+            output += "<option>" + faculty + "</option>";
+        }
+
+        document.getElementById("faculty").innerHTML = output;
+    }
+
+    function show() {
+        var output = "<table class = 'table' > ";
+        // var faculty = document.getElementById("faculty");
+        let faculty = document.getElementById('faculty').value;
+        var profile = facultyProfile[faculty];
+
+        output += "<tr><th>name</th><td>" + faculty + "</td></tr>";
+        for (var prop in profile) {
+            output += " <tr> <th>" + prop + "</th>";
+            // print 'Yes' if isMarried property is true; otherwise 'No'
+            if (prop == "isMarried") {
+                if (profile[prop])
+                    output += " <td>Yes</td> </tr>";
+                else output += " <td>No</td> </tr>";
+            } else if (prop == "hobbies") {
+                // since hobbies is an array, use a loop to print each hobby
+                output += " <td>";
+                var no_of_hobbies = profile[prop].length;
+                for (var i = 0; i < no_of_hobbies; i++) {
+                    var hobby = profile[prop][i];
+                    // no need to print ", " for last element
+                    if (i === no_of_hobbies - 1)
+                        output += hobby;
+                    else
+                        output += hobby + ", ";
+                }
+                output += " </td></tr>";
+            } else {
+                output += " <td>" + profile[prop] + "</td> </tr>";
+            }
+        } // end of 'for' loop
+        output += "</table>";
+        document.getElementById("profile").innerHTML = output;
+    }
+</script>
+</body>
+</html>

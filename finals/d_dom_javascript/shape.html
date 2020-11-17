@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
+    <style>
+        .rectangle {
+            height: 50px;
+            width: 100px;
+            background-color: grey;
+        }
+
+        .square {
+            height: 50px;
+            width: 50px;
+            background-color: grey;
+        }
+
+        .circle {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background-color: grey;
+        }
+
+        .oval {
+            height: 50px;
+            width: 100px;
+            border-radius: 50%;
+            background-color: grey;
+        }
+    </style>
+    <script>
+        /* Add Your Code */
+        function getRndInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function generateShape() {
+            let arr = ['rectangle', 'square', 'circle', 'oval'];
+            let rand = getRndInteger(0, arr.length - 1);
+            // console.log(rand);
+            // return;
+            document.getElementById("shape").setAttribute("class", arr[rand])
+        }
+    </script>
+</head>
+<body>
+
+<button class="ml-3 btn btn-dark" onclick="generateShape()"
+        type="button">
+    Generate a shape
+</button>
+
+<div id="shape"><!-- generate a shape here --></div>
+
+<!-- Optional JavaScript -->
+<script>
+    // console.log();
+    // document.write();
+</script>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script crossorigin="anonymous"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

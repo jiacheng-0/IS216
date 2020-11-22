@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
+
+    <title>Title</title>
+    <!-- VueJS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js" type="text/javascript"></script>
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+    <style>
+        .select {
+            width: 50%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="jumbotron">
+    <h2>View Faculty Profile</h2>
+</div>
+
+<div id="app">
+    <div class="m-4 select">
+
+        <label for="faculty">Select Faculty:</label>
+        <select id="faculty" v-model="selectedFaculty">
+            <option v-for="faculty in facultyList">{{faculty}}</option>
+        </select>
+
+        <!--@click="show()" not needed-->
+        <button class="btn btn-dark" type="button">
+            View Profile
+        </button>
+    </div>
+
+    <div id="profile" v-if="selectedFaculty !== ''">
+        <facultytable :faculty_name="selectedFaculty" :faculty_obj="getFacultyObj()"></facultytable>
+    </div>
+
+</div>
+
+
+<script>
+    let facultyProfile = {
+        Mary: {
+            age: 35,
+            job_title: "Senior Lecturer",
+            isMarried: true,
+            number_of_Kids: 2,
+            hobbies: ["Yoga", "Zumba", "Reading"]
+        },
+        John: {
+            age: 38,
+            job_title: "Senior Instructor",
+            isMarried: false,
+            number_of_Kids: 0,
+            hobbies: ["Rock climbing"]
+        },
+        Jesper: {
+            age: 40,
+            job_title: "Lecturer",
+            isMarried: true,
+            number_of_Kids: 0,
+            hobbies: ["Swimming", "Badminton"]
+        },
+        Alice: {
+            age: 29,
+            job_title: "Instructor",
+            isMarried: false,
+            number_of_Kids: 0,
+            hobbies: ["Running", "Table tennis"]
+        }
+    }
+    Vue.component('facultytable', {
+        props: ["faculty_name", "faculty_obj"],
+        // props: {
+        //     faculty_name: {
+        //         type: String,
+        //         default: () => ("")
+        //     },
+        //     faculty_obj: {
+        //         type: Object,
+        //         default: () => ({}),
+        //     },
+        // },
+        template: `
+          <table class="table">
+          <tr>
+            <th> name</th>
+            <td> {{ faculty_name }} </td>
+          </tr>
+          <tr>
+            <th> age</th>
+            <td> {{ faculty_obj.age }} </td>
+          </tr>
+          <tr>
+            <th> job_title</th>
+            <td> {{ faculty_obj.job_title }} </td>
+          </tr>
+          <tr>
+            <th> isMarried</th>
+            <td> {{ faculty_obj.isMarried }} </td>
+          </tr>
+          <tr>
+            <th> number_of_Kids</th>
+            <td> {{ faculty_obj.number_of_Kids }} </td>
+          </tr>
+          <tr>
+            <th> hobbies</th>
+            <td> {{ getHobbies }} </td>
+          </tr>
+          </table>
+        `,
+        computed: {
+            getHobbies: function () {
+                return this.faculty_obj.hobbies.join(", ");
+            }
+        }
+    });
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            facultyList: ["Mary", "John", "Jesper", "Alice"],
+            selectedFaculty: "",
+            facultyProfile: facultyProfile
+        },
+        methods: {
+            show: function () {
+
+            },
+            getFacultyObj: function () {
+                return facultyProfile[this.selectedFaculty];
+            }
+        },
+        mounted: function () {
+            this.selectedFaculty = this.facultyList[0];
+        }
+    });
+</script>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script crossorigin="anonymous"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

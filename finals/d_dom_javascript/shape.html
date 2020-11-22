@@ -38,7 +38,7 @@
 
         function generateShape() {
             let arr = ['rectangle', 'square', 'circle', 'oval'];
-            let rand = getRndInteger(0, arr.length - 1);
+            let rand = getRndInteger(arr.length - 1);
             // console.log(rand);
             // return;
             document.getElementById("shape").setAttribute("class", arr[rand])

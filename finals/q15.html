@@ -1,0 +1,36 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="vue">
+    Choose an option:
+    <!-- Add Your Code -->
+
+    <!--Doesnt work, like lazy lyndy hehe-->
+<!--    <select value="NTU" v-model="selectedOption">-->
+<!--        <select value="NUS" v-model="selectedOption">-->
+<!--            <select value="SMU" v-model="selectedOption">-->
+
+
+    <select v-model="selectedOption">
+        <option>NTU</option>
+        <option>NUS</option>
+        <option>SMU</option>
+    </select>
+    <div>Selected Option: {{selectedOption}}</div>
+    <h1 v-bind:style="lazyStyle">Lazy Lyndy</h1>
+
+    <h1 v-bind:style="lazyStyle">Jia Cheng</h1>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#vue',
+        data: {
+            lazyStyle: 'color:red; font-style:italic',
+            selectedOption: document.getElementsByTagName("select")[0].getElementsByTagName("option")[2].value
+        }
+    });
+</script>
+</body>
+</html>

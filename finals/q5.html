@@ -37,11 +37,16 @@
     // }
     // document.write();
 
-    let p = [
-    //     {title: 'president', phone: 123},
-    //     {title: 'president', phone: 123},
-    //     {title: 'president', phone: 123}
-    // ]
+    let personnel = [
+        {title: 'president', phone: 123},
+        {title: 'president', phone: 123},
+        {title: 'president', phone: 123}
+    ]
+    // console.log(Object.keys(personnel[1])); // ['title', 'phone']
+    let keys = Object.keys(personnel[1]);
+    for (let prop of keys) {
+        console.log(prop + " : " + personnel[1][prop])
+    }
     // for (let prop in p[1]) {
     //     console.log(prop + " : " + p[1][prop])
     // }

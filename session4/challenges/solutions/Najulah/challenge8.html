@@ -76,15 +76,15 @@
         //          Else no need to apply any styling
         //
         // HINT: Re-use your Challenge 7 code
-        for (p of friends) {
+        for (personnel of friends) {
             table_data += "<tr>";
             // let gender = p[1] == "Male"?"male"
             // console.log(p[1].toLowerCase());
-            let status = p[3] > 50000 ? "rich" : "";
-            table_data += "<td>" + p[0] + "</td>";
-            table_data += "<td class='" + p[1].toLowerCase() + "'>" + p[1] + "</td>";
-            table_data += "<td>" + p[2] + "</td>";
-            table_data += "<td class='" + status + "'>" + p[3] + "</td>";
+            let status = personnel[3] > 50000 ? "rich" : "";
+            table_data += "<td>" + personnel[0] + "</td>";
+            table_data += "<td class='" + personnel[1].toLowerCase() + "'>" + personnel[1] + "</td>";
+            table_data += "<td>" + personnel[2] + "</td>";
+            table_data += "<td class='" + status + "'>" + personnel[3] + "</td>";
             table_data += "</tr>";
         }
 

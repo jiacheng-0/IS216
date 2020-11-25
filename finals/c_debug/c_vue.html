@@ -44,8 +44,10 @@
         </button>
     </div>
 
-    <div id="profile" v-if="selectedFaculty !== ''">
-        <facultytable :faculty_name="selectedFaculty" :faculty_obj="getFacultyObj()"></facultytable>
+    <div id="profile" v-if="selectedFaculty !== ''"> <!--  v-if helps with the initial loading  -->
+        <facultytable :faculty_obj="getFacultyObj()"></facultytable>
+<!--        <facultytable :faculty_name="selectedFaculty" :faculty_obj="facultyProfile[selectedFaculty]"></facultytable>-->
+<!--        <facultytable :faculty_name="selectedFaculty" :faculty_obj="getFacultyObj()"></facultytable>-->
     </div>
 
 </div>
@@ -84,21 +86,19 @@
     }
     Vue.component('facultytable', {
         props: ["faculty_name", "faculty_obj"],
+        // alternative way for props
         // props: {
         //     faculty_name: {
         //         type: String,
         //         default: () => ("")
-        //     },
-        //     faculty_obj: {
-        //         type: Object,
-        //         default: () => ({}),
         //     },
         // },
         template: `
           <table class="table">
           <tr>
             <th> name</th>
-            <td> {{ faculty_name }} </td>
+<!--            <td> {{ faculty_name }} </td>-->
+            <td> {{ faculty_obj.name + " hehe" }} </td>
           </tr>
           <tr>
             <th> age</th>
@@ -136,11 +136,10 @@
             facultyProfile: facultyProfile
         },
         methods: {
-            show: function () {
-
-            },
             getFacultyObj: function () {
-                return facultyProfile[this.selectedFaculty];
+                let obj = facultyProfile[this.selectedFaculty];
+                obj.name = this.selectedFaculty;
+                return obj;
             }
         },
         mounted: function () {

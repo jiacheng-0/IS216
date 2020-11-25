@@ -4,47 +4,77 @@
     <title>FormValidation</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+
     <!-- Vue JS -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    
+
 </head>
 
 <body>
-    <div id="app" class="m-2"> 
-        <!-- Add/Modify code below -->
-        <div class="form-group">
-            <label for="user">Username</label>
-            <input type="text" class="form-control" id="user" v-model="user" placeholder="Enter Name">
-        </div>
-        <div class="form-group">
-            <label for="pwd1">Password</label>
-            <input type="password" class="form-control"id="pwd1"  v-model="pwd1" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <label for="pwd2">Confirm Password</label>
-            <input type="password" class="form-control" id="pwd2" v-model="pwd2" placeholder="Confirm Password">
-        </div>
-        <button @click='validate' class="btn btn-primary">Submit</button>
-    
-        <div class="alert alert-warning" v-if="show">{{error}}</div>
+<div class="m-2" id="app">
+    <!-- Add/Modify code below -->
+    <div class="form-group">
+        <label for="user">Username</label>
+        <input class="form-control" id="user" placeholder="Enter Name" type="text" v-model="user">
     </div>
+    <div class="form-group">
+        <label for="pwd1">Password</label>
+        <input class="form-control" id="pwd1" placeholder="Password" type="password" v-model="pwd1">
+    </div>
+    <div class="form-group">
+        <label for="pwd2">Confirm Password</label>
+        <input class="form-control" id="pwd2" placeholder="Confirm Password" type="password" v-model="pwd2">
+    </div>
+    <button @click='validate' class="btn btn-primary">Submit</button>
 
-    <script>
-        // Add/Modify code below
-        new Vue({
-            el: '#app',
-            data: {
-                users: [ {"user": "Jack", "pwd": "abc"}, {"user": "Mary", "pwd": "def"}, 
-                            {"user": "John", "pwd": "123"}, {"user": "Cherry", "pwd": "456"}
-                    ]
+    <div class="alert alert-warning" v-if="show">{{error}}</div>
+</div>
+
+<script>
+    // Add/Modify code below
+    new Vue({
+        el: '#app',
+        data: {
+            users: [
+                {"user": "Jack", "pwd": "abc"},
+                {"user": "Mary", "pwd": "def"},
+                {"user": "John", "pwd": "123"},
+                {"user": "Cherry", "pwd": "456"}
+            ],
+            show: false,
+            error: '',
+            user: '',
+            pwd1: '',
+            pwd2: ''
+        },
+        methods: {
+            validate: function () {
+                console.log(this.user)
+                console.log(this.pwd1)
+                console.log(this.pwd2)
+
+
+                // check
+                for (let user in this.users) {
+                    if (user.user === this.user &&
+                        user.pwd === this.pwd1 &&
+                        this.pwd1 === this.pwd2
+                    ) {
+                        this.show = false;
+                        return true;
+                    }
+                }
+                this.show = true;
+                return false;
             }
-        })
-    </script>
+        }
+    })
+</script>
 
 </body>
 </html>

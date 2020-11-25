@@ -4,14 +4,15 @@
     <title>MaxChar</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+
     <!-- Vue JS -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
- 
+
     <style>
         .warn {
             background-color: mistyrose
@@ -20,24 +21,34 @@
 </head>
 
 <body>
-    <div id="app"> 
-        <!-- modify the following textarea -->
-        <textarea> 
-        </textarea> 
-        {{text.length}}
-    </div>
+<div id="app">
+    <!-- modify the following textarea -->
+    <textarea :maxlength="limit" v-model="text_str" :class="{warn : longText}">
+    </textarea>
+    {{text.length}}
+    Remaining Chars: {{ limit - textarea_length }}
+</div>
 
-    <script>
-        var vm = new Vue({
-            el: '#app',
-            data: {
-                text: 'What if I told you ' +
-                            'Vue can do that',
-                limit: 50 
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            text: 'What if I told you ' +
+                'Vue can do that',
+            limit: 50,
+            text_str: ""
+        },
+        // add code here
+        computed: {
+            textarea_length: function () {
+                return this.text_str.length;
+            },
+            longText: function () {
+                return (this.limit - this.text_str.length) <= 10;
             }
-            // add code here
-        })
-    </script>
+        }
+    })
+</script>
 
 </body>
 </html>

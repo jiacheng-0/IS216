@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MeasurementConverter</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Vue JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app" class="m-4"> 
+        <h3>Convert from one measurement to another</h3>
+
+        <!-- Add Code Here -->
+
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                Length: {"Inch2centimetre": 2.54, "Inch2Yard": 0.0277778, "Inch2Mile": 0.000015783,
+                        "centimetre2Inch": 0.393701, "centimetre2Yard": 0.0109361, "centimetre2Mile": 0.0000062137,
+                        "Yard2Inch": 36, "Yard2centimetre": 91.44, "Yard2Mile": 0.000568182},
+                Volume: {"litre2gallon": 0.219969, "gallon2litre": 4.54609},
+                Digital: {"Byte2Bit": 8, "Bit2Byte": 0.125},
+                Mass:   {"Ounce2Gram": 28.3495, "Ounce2Pound": 0.0625, 
+                        "Gram2Ounce": 0.035274, "Gram2Pound": 0.00220462,
+                        "Pound2Ounce": 16, "Pound2Gram": 453.592},
+                measurements: ["Length", "Volume", "Digital", "Mass"],
+                selected_measurement: 'Length',
+                unit1: 'Inch',
+                unit2: 'centimetre',
+                val1: 1
+            }
+
+            // Add Code Here
+            
+        })
+    </script>
+
+</body>
+</html>

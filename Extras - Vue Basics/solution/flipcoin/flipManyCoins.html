@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Flip Many Coins</title>
+    <meta charset="utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- production version, optimized for size and speed -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+
+
+    <style>
+        .my-progress {
+            height: 25px;
+        }
+    </style>
+
+
+
+</head>
+<body>
+
+    <div id='app' class="container text-center">
+
+        <div class="row p-3">
+            <div class="col">
+                Number of coins <input type='number' v-model.number="numCoins" min='1'  @change='flip'  >
+                <button class="btn btn-primary" @click='flip' >Flip</button>
+            </div>
+        </div>  
+
+        <div class="row justify-content-center p-3">
+            <div class="col">
+                <template v-for='isHead in isHeadList'>
+                    <img :src="isHead ? 'img/head.png' : 'img/tail.png'">    
+                </template>
+            </div>             
+        </div>
+
+        <div class="row justify-content-center p-3">
+            <div class="col">
+                Flipped {{ count }} times
+            </div>             
+        </div>        
+
+    </div>
+
+    <script>        
+
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                numCoins: 3,
+                isHeadList: [],
+                count: 0,
+            },
+            
+            created: function() { // constructor
+                this.flip();
+                this.count = 0;
+            },
+
+            methods: {                
+                flip: function() {
+                    if ( this.numCoins <= 0 ) this.numCoins = 1;
+
+                    // reset the size of the array
+                    this.isHeadList.splice(this.numCoins);
+                    
+                    for ( let i = 0; i < this.numCoins; i++) {
+                        // this.isHeadList[i] = Math.random() < 0.5;
+                        // For the above code, Vue cannot detect the change to array elements 
+                        // Need to use Vue.set and Vue.splice
+
+                        Vue.set( this.isHeadList, i, Math.random() < 0.5 );
+                        this.count++;
+                    }
+                },
+            }
+        })
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

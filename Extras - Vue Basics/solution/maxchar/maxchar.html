@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MaxChar</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Vue JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+ 
+    <style>
+        .warn {
+            background-color: mistyrose
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"> 
+        <textarea
+            v-model="text"
+            :class = "{ warn: longText }"
+            :maxlength="limit"> 
+        </textarea> 
+        {{text.length}}
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                text: 'What if I told you ' +
+                            'Vue can do that',
+                limit: 50 
+            },
+            computed: {
+                longText: function() {
+                    if (this.limit - this.text.length <= 10) { 
+                        return true
+                    } else {
+                        return false
+                    } 
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

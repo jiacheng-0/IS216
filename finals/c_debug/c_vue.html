@@ -84,50 +84,43 @@
             hobbies: ["Running", "Table tennis"]
         }
     }
-    Vue.component('facultytable', {
-        props: ["faculty_name", "faculty_obj"],
-        // alternative way for props
-        // props: {
-        //     faculty_name: {
-        //         type: String,
-        //         default: () => ("")
-        //     },
-        // },
-        template: `
-          <table class="table">
-          <tr>
-            <th> name</th>
+Vue.component('facultytable', {
+    props: ["faculty_name", "faculty_obj"],
+    template: `
+      <table class="table">
+      <tr>
+        <th> name</th>
 <!--            <td> {{ faculty_name }} </td>-->
-            <td> {{ faculty_obj.name + " hehe" }} </td>
-          </tr>
-          <tr>
-            <th> age</th>
-            <td> {{ faculty_obj.age }} </td>
-          </tr>
-          <tr>
-            <th> job_title</th>
-            <td> {{ faculty_obj.job_title }} </td>
-          </tr>
-          <tr>
-            <th> isMarried</th>
-            <td> {{ faculty_obj.isMarried }} </td>
-          </tr>
-          <tr>
-            <th> number_of_Kids</th>
-            <td> {{ faculty_obj.number_of_Kids }} </td>
-          </tr>
-          <tr>
-            <th> hobbies</th>
-            <td> {{ getHobbies }} </td>
-          </tr>
-          </table>
-        `,
-        computed: {
-            getHobbies: function () {
-                return this.faculty_obj.hobbies.join(", ");
-            }
+        <td> {{ faculty_obj.name + " hehe" }} </td>
+      </tr>
+      <tr>
+        <th> age</th>
+        <td> {{ faculty_obj.age }} </td>
+      </tr>
+      <tr>
+        <th> job_title</th>
+        <td> {{ faculty_obj.job_title }} </td>
+      </tr>
+      <tr>
+        <th> isMarried</th>
+        <td> {{ faculty_obj.isMarried }} </td>
+      </tr>
+      <tr>
+        <th> number_of_Kids</th>
+        <td> {{ faculty_obj.number_of_Kids }} </td>
+      </tr>
+      <tr>
+        <th> hobbies</th>
+        <td> {{ getHobbies }} </td>
+      </tr>
+      </table>
+    `,
+    computed: {
+        getHobbies: function () {
+            return this.faculty_obj.hobbies.join(", ");
         }
-    });
+    }
+});
     let vm = new Vue({
         el: '#app',
         data: {

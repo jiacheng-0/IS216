@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Curriculum</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Vue JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app" class="m-2"> 
+        <h3 class="mb-4">BSC (IS) Curriculum</h3>
+        Select Category
+        <select v-model="selected_cat">
+            <option v-for="cat in categories">{{cat}}</option>
+        </select>
+    
+        <ul class="mt-2">
+            <li v-for="course in courses">{{course}}</li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                is_curriculum: {
+                    "University Core": ["Statistics", "Computational Thinking", "Managing", 
+                                        "Writing & Reasoning", "Internship", 
+                                        "Economics & Society", "Technology & Society", 
+                                        "Cultures of the Modern World", "Community Service",
+                                        "Ethics & Social / Corporate Responsibility", 
+                                        "Big Questions", "Global Expoure"],
+                    "IS Major Core": ["Information Systems & Innovation", 
+                                        "Business Process Analysis and Solutioning", 
+                                        "Enterprise Solution Development", 
+                                        "Enterprise Solution Management", "Digital Business Technology and Transformation",
+                                        "Introduction to Programming", "Software Project Management", 
+                                        "Web Application Development I", "Web Application Development II",
+                                        "Data Management", "Interaction Design and Prototyping", 
+                                        "Information Systems Project Experience"],
+                    "Electives - Business Analytics": ["Analytics Foundation", "Data Mining & Business Analytics",
+                                            "Geospatial Analytics & Applications", 
+                                            "Managing Customer Relations with Analytics : Asian Insights",
+                                            "Social Analytics and Applicaitons", "Text Mining and Language Processing",
+                                            "Visual Analytics for Business Intelligence"],
+                    "Electives - Digital Business Solutioning": ["Digital Transformation Strategy",
+                                        "Enterprise Analytics for Decision Support", "Enterprise Business Solutions",
+                                        "Internet of Things: Technology and Applications", 
+                                        "Managing Customer Relations with Analytics : Asian Insights",
+                                        "Systems for Intelligent Cities"],
+                    "Electives - Financial Technology": ["Digital Banking Enterprise Architecture",
+                                        "Corporate Banking Technology & Smart Contracts",
+                                        "Digital Payments & Innovation", 
+                                        "Financial Markets Processes & Technology", 
+                                        "Retail Banking & Mobile Technology"] 
+                    },
+                selected_cat: 'University Core'
+            },
+            computed: {
+                categories: function() {
+                    // returns keys ("University Core", "IS Major Core", etc.)
+                    return Object.keys(this.is_curriculum)
+                },
+                courses: function() {
+                    return this.is_curriculum[this.selected_cat]
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

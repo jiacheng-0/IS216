@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CurrencyConverter</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Vue JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app" class="m-4"> 
+        <h3>Convert Singapore Dollar to Other Currency</h3>
+        <input type="number" v-model="amt1"> 
+        Singapore Dollar<br>
+        <input type="number" v-model="amt2"> 
+        <select v-model="selected_currency">
+            <option v-for="currency in currencies">{{currency}}</option>
+        </select>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                exchange_rates: {'United States Dollar': 0.72, 'Euro': 0.63, 'Pound sterling': 0.57,
+                                'Swiss Francs': 0.67, 'Swedish Krona': 6.43, 'Philippine peso': 35.62,
+                                'Malaysian Ringgit': 3.08, 'Indonesian Rupiah': 10615.06, 'Ether': 0.0030,
+                                'Bitcoin': 0.000077, 'Vietnamese dong': 16748.37, 'Myanmar Kyat': 1003.84},
+                amt1: 1,
+                selected_currency: 'United States Dollar'
+            },
+            computed: {
+                currencies: function() {
+                    let result = Object.keys(this.exchange_rates)
+                    return result
+                },
+                amt2: function() {
+                    let rate = this.exchange_rates[this.selected_currency]
+                    let result = rate * this.amt1
+                    return result.toFixed(6)
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

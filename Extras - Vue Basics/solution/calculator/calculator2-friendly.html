@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Calculator</title>
+    <meta charset="utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- production version, optimized for size and speed -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+
+
+    <style>
+        .my-progress {
+            height: 25px;
+        }
+    </style>
+
+
+
+</head>
+<body>
+
+    <div id='app' class="container" style='width:400px;'>
+
+        <div class="row border m-3 text-right" style='height:100px;' >
+            <div class="col">
+                <p>{{ message }}</p>
+                <p>{{ answer }}</p>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col">
+                <template v-for="i in buttons.length">
+                    <button 
+                        :id="buttons[i-1]" 
+                        class="btn btn-light m-2" style="width:50px" 
+                        @click='doAction(buttons[i-1])'
+                    >{{ buttons[i-1] }}</button>
+                    <br v-if='i % 4 == 0'>
+                </template>
+            </div>
+        </div>
+        
+    </div>
+    <script>        
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: '',
+            answer: '',
+            buttons: [
+                1, 2, 3, 'AC',
+                4, 5, 6, '+',
+                7, 8, 9, '-',
+                0, '.', '=',
+            ],
+        },
+        methods: {
+            doAction: function(action) {
+                if ( action == '=' ) {
+
+                    this.answer = this.compute();
+
+                    return;
+                } 
+                
+                if ( action == 'AC' ) {
+                    this.message = '';
+                    this.answer = '';
+                    return;
+                }
+
+                let actionIsOperator = ['+', '-'].includes(action);
+
+                // has answer
+                if ( this.answer != '') {
+                    if ( this.answer != 'ERR' && actionIsOperator){
+                        // use valid answer as first operand.
+                        this.message = this.answer + action;
+                        this.answer = '';    
+                        return;
+                    }
+
+                    //else restart
+                    this.message = '';    
+                    this.answer = '';    
+                }
+
+
+                // first character is an operator
+                if ( this.message.length == 0 && actionIsOperator ) {
+                    this.message = '0';                
+                }
+
+                this.message += action;
+                
+            },
+
+
+            compute: function() {
+                return this.computeAddMinus(this.message);
+            },
+
+            computeAddMinus: function(str) {
+                var arr = str.split('+');
+                let result = 0;
+
+                for ( let x = 0; x < arr.length; x++) {
+                    let ele = arr[x];
+                    if ( ele.indexOf('-') > 0 ) {
+                        let temp = this.computeMinus(ele);
+                        if ( temp == 'ERR' ) return 'ERR';
+
+                        result += temp
+                    } else {
+                        result += parseFloat( ele );
+                        if ( isNaN(result)) return 'ERR';
+                    }
+
+                }
+
+                return result;
+            },
+
+            computeMinus: function(str) {
+                let arr = str.split('-');
+                let result = arr[0];
+
+                // subsequent operand
+                for ( let x = 1; x < arr.length; x++) {
+                    let ele = arr[x];
+                    result -= parseFloat( ele );
+                    if ( isNaN(result)) return 'ERR';
+                }
+
+                return result;
+            },
+
+        }
+    })
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

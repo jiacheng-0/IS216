@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Puzzle</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+
+    <!-- Vue JS -->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+<div id="app">
+    They call me fruit.<br>
+    They call me fish.<br>
+    They call me insect.<br>
+    But actually I'm not one of those.
+
+    I am a HAHAH <!-- Add Code Heere--><span v-if="showSolution === false">
+<!--        <button @click='toggleShow()'>?</button>-->
+        <button @click='showSolution = true'>?</button>
+    </span>
+    <span v-else>
+        Dragon
+    </span>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            showSolution: false
+        },
+        methods: {
+            toggleShow: function () {
+                this.showSolution = true;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

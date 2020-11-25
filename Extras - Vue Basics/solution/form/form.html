@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Vue JS -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app" class="m-2"> 
+        <div class="form-group">
+            <label for="user">Username</label>
+            <input type="text" class="form-control" id="user" v-model="user" placeholder="Enter Name">
+        </div>
+        <div class="form-group">
+            <label for="pwd1">Password</label>
+            <input type="password" class="form-control"id="pwd1"  v-model="pwd1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="pwd2">Confirm Password</label>
+            <input type="password" class="form-control" id="pwd2" v-model="pwd2" placeholder="Confirm Password">
+        </div>
+        <button @click='validate' class="btn btn-primary">Submit</button>
+    
+        <div class="alert alert-warning" v-if="show">{{error}}</div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                users: [ {"user": "Jack", "pwd": "abc"}, {"user": "Mary", "pwd": "def"}, 
+                            {"user": "John", "pwd": "123"}, {"user": "Cherry", "pwd": "456"}
+                    ],
+                user: '',
+                pwd1: '',
+                pwd2: '',
+                show: false,
+                error: ''
+            },
+            methods: {
+                validate: function() {
+                    console.log("in validate")
+                    
+                    if(this.user=='' || this.pwd1=='' || this.pwd2 == '') { // check if any of the input fields are empty
+                        this.error = "Username, password, and confirm password cannot be empty"
+                        this.show = true 
+                    } else if(this.pwd1 != this.pwd2) { // check if passwords match
+                        this.error = "Passwowrds do not match!"
+                        this.show = true
+                    } else {
+                        // check if user exists in the data
+                        let userExist = false
+                        let pwd = ''
+                        for (a_user of this.users) {
+                            if (a_user.user == this.user) {
+                                userExist = true
+                                pwd = a_user.pwd
+                                break
+                            }
+                        }
+                        if(!userExist) {
+                            this.error = "Username does not exist!"
+                            this.show = true   
+                        } else if (pwd != this.pwd1) {
+                            this.error = "Password incorrect!"
+                            this.show = true   
+                        }
+                    }
+                    
+
+                   
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

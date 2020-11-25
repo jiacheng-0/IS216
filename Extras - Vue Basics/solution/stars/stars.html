@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stars</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Vue JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+ 
+</head>
+
+<body>
+    <div id="app" class="m-4"> 
+        Num: <input type="number" v-model="num"> <br>
+        Select Symbol:<br>
+        stars: <input name="symbol" type="radio" v-model="selected" value='*' >
+        dollars: <input name="symbol" type="radio" v-model="selected" value='$'>
+        <br>
+        {{print()}}
+        <br>
+        <div v-html="shape"></div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                num: 0,
+                selected: ''
+            },
+            methods: {
+                print: function() {
+                    let symbol = '*'
+                    if (this.selected == '$')
+                        symbol = '$'
+                    let result = ''
+                    for(let i=0; i < this.num; i++){
+                        result += symbol
+                    }
+                    return result
+                }
+            },
+            computed: {
+                shape: function() {
+                    let symbol = '*'
+                    if (this.selected == '$')
+                        symbol = '$'
+                    let result = ''
+                    for(let i=0; i < this.num; i++){
+                        for(let j=0; j<=i; j++) {
+                            result += symbol 
+                        }  
+                        result += '<br>'
+                    }
+                    return result
+                
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

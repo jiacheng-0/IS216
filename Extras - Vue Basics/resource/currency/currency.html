@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CurrencyConverter</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Vue JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app" class="m-4"> 
+        <h3>Convert Singapore Dollar to Other Currency</h3>
+
+        <!-- Add/Modify following code -->
+        <input type="number"> 
+        Singapore Dollar<br>
+        <input type="number"> 
+        <select>
+            <option></option>
+        </select>
+    </div>
+
+    <script>
+        // Add/Modify following code
+        new Vue({
+            el: '#app',
+            data: {
+                exchange_rates: {'United States Dollar': 0.72, 'Euro': 0.63, 'Pound sterling': 0.57,
+                                'Swiss Francs': 0.67, 'Swedish Krona': 6.43, 'Phillippine peso': 35.62,
+                                'Malaysian Ringgit': 3.08, 'Indonesian Rupiah': 10615.06, 'Ether': 0.0030,
+                                'Bitcoin': 0.000077, 'Vietnamese dong': 16748.37, 'Myanmar Kyat': 1003.84}
+            }
+        })
+    </script>
+
+</body>
+</html>

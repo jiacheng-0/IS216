@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Farm</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Vue JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+ 
+</head>
+
+<body>
+    <div id="app" class='m-1'> 
+        <h2>Today's animals</h2>
+        <!-- Part A -->
+        <label>
+            <input type="radio" v-model="animal" :value="animals[i]"/> {{animals[i]}}
+        </label><br>
+        <label>
+            <input type="radio" v-model="animal" :value="animals[i+1]"/> {{animals[i+1]}}
+        </label><br>
+        <input type="submit" value="Add to Farm" @click.prevent="addToFarm"/>
+        <br>
+        Your farm is composed by {{ farm.join(' ') }}
+   </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                animals: ['🐖', '🐓', '🐄', '🐑'], 
+                animal: undefined,
+                farm: [],
+            },
+            computed: {
+                i: function() {
+                    return this.i = Math.floor(Math.random() * (this.animals.length - 1))
+                }
+            },
+            methods: {
+                addToFarm: function() {
+                    if (this.animal === undefined) 
+                        return  
+                    this.farm.push(this.animal)
+                    this.animal = undefined 
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

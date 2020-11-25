@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MeasurementConverter</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Vue JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app" class="m-4"> 
+        <h3>Convert from one measurement to another</h3>
+        <select v-model="selected_measurement">
+            <option v-for="measurement in measurements">{{measurement}}</option>
+        </select><br><br>
+
+        <input type="number" v-model="val1"> 
+        <select v-model="unit1">
+            <option v-for="option in options">{{option}}</option>
+        </select><br>
+
+        <input type="number" v-model="val2" disabled> 
+        <select v-model="unit2">
+            <option v-for="option in options">{{option}}</option>
+        </select>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                Length: {"Inch2centimetre": 2.54, "Inch2Yard": 0.0277778, "Inch2Mile": 0.000015783,
+                        "centimetre2Inch": 0.393701, "centimetre2Yard": 0.0109361, "centimetre2Mile": 0.0000062137,
+                        "Yard2Inch": 36, "Yard2centimetre": 91.44, "Yard2Mile": 0.000568182},
+                Volume: {"litre2gallon": 0.219969, "gallon2litre": 4.54609},
+                Digital: {"Byte2Bit": 8, "Bit2Byte": 0.125},
+                Mass:   {"Ounce2Gram": 28.3495, "Ounce2Pound": 0.0625, 
+                        "Gram2Ounce": 0.035274, "Gram2Pound": 0.00220462,
+                        "Pound2Ounce": 16, "Pound2Gram": 453.592},
+                measurements: ["Length", "Volume", "Digital", "Mass"],
+                selected_measurement: 'Length',
+                unit1: 'Inch',
+                unit2: 'centimetre',
+                val1: 1
+            },
+            computed: {
+                // options computed property is reactive to selected_measure data property
+                // if it changes, options will be re-computed
+                options: function() {
+                    let result = []
+                    // this gets the object corresponding to the selection
+                    let measurement_obj = this[this.selected_measurement] // e.g. this['Length']
+                    let keys = Object.keys(measurement_obj) // ["Inch2centimetre", "Inch2Yard", ...]
+                    for (key of keys) {
+                        let items = key.split("2")  // ["Inch", "centimetre"]
+                        for (item of items) {
+                            if (!result.includes(item)) {
+                                result.push(item)
+                            }
+                        }
+                    }
+                    console.log(result)
+                    return result
+                },
+                val2: function() {
+                    // if val1 changes, we want to update val2
+                    // hence, the key is unit1 to unit2
+                    let measurement_obj = this[this.selected_measurement]
+                    let key = this.unit1 + "2" + this.unit2 // build a key. e.g. Inch2centimetre
+                    let conv = 1
+                    
+                    // check if the key exists in the object
+                    if (key in measurement_obj) // e.g. inch2inch is not provided in data)
+                        conv = measurement_obj[key]
+                    
+                    let result = conv * this.val1
+                    return result
+                    //return result.toFixed(6)
+                }
+                // using computed properties on both val1 and val2 will cause an 
+                // infinite loop as they will update each other
+                /*val1: function() {
+                    // if val2 changes, we want to update val1
+                    // hence, the key is unit2 to unit1
+                    let measurement_obj = this[this.selected_measurement]
+                    let key = this.unit2 + "2" + this.unit1 // build a key. e.g. centimetre2Inch
+                    let conv = measurement_obj[key]
+                    let result = conv * this.val2
+                    return result.toFixed(6)
+                } */
+            }
+        })
+    </script>
+
+</body>
+</html>

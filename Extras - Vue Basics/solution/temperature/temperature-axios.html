@@ -81,6 +81,7 @@
                 temperatureList: [],
             },
             created: function () {
+                console.log('creating...')
                 this.getTemperature();
             }, // created
             computed: {
@@ -126,6 +127,7 @@
                                     'temperature': reading.value
                                 });
                             }
+                            console.log('data pull liao lor')
                         })
                         .catch( error => {
                             app.message = 'HTTP Error ' + error.message;

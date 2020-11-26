@@ -18,7 +18,7 @@
    <span v-for="n in words.length">
       <span 
          :style="{ color : colors[ (n-1) % colors.length], 
-            textDecoration: (n % 2 == 0) ? 'underline' : 'none' }"
+            textDecoration: (n % 2 === 0) ? 'underline' : 'none' }"
       >{{words[n-1]}}</span>
       &nbsp;
    </span>

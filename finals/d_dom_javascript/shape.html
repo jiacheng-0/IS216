@@ -32,16 +32,19 @@
     </style>
     <script>
         /* Add Your Code */
-        function getRndInteger(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
+        // function getRndInteger(min, max) {
+        //     return Math.floor(Math.random() * (max - min + 1)) + min;
+        // }
+        // let rand = getRndInteger(arr.length - 1);
 
         function generateShape() {
             let arr = ['rectangle', 'square', 'circle', 'oval'];
-            let rand = getRndInteger(arr.length - 1);
-            // console.log(rand);
-            // return;
-            document.getElementById("shape").setAttribute("class", arr[rand])
+
+            let rand = Math.floor(Math.random() * arr.length)
+            console.log(rand);
+            // document.getElementById("shape").setAttribute("class", arr[rand]);
+
+            document.getElementById("shape").innerHTML = `<div class="${arr[rand]}"></div>`
         }
     </script>
 </head>
